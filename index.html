@@ -1,206 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Message for Sakshi</title>
+    <title>Altamas ki Sakshi ke liye Surprise</title>
     <style>
         :root {
-            --primary: #ff4d94;
+            --rose: #ff0055;
             --gold: #ffd700;
-            --bg: #0a0a0a;
+            --deep-dark: #0f0c29;
         }
 
         body {
-            background-color: var(--bg);
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
             color: white;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-        }
-
-        /* Progress Bar */
-        #progress-container {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 8px;
-            background: #222;
-            z-index: 1000;
-        }
-
-        #progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(to right, var(--primary), var(--gold));
-            transition: 0.4s;
-        }
-
-        /* Intro Screen */
-        #intro {
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
             text-align: center;
         }
 
-        /* Step Styling */
-        .step {
-            display: none;
-            min-height: 80vh;
-            width: 90%;
-            max-width: 600px;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            animation: slideIn 0.8s ease-out;
+        #journey-box {
+            width: 85%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(50px); }
+        .step { display: none; animation: fadeIn 0.8s ease-in-out; }
+        .active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        h1 { color: var(--rose); text-shadow: 0 0 10px var(--rose); font-size: 1.8rem; }
+        p { font-size: 1.1rem; color: #f0f0f0; margin: 20px 0; line-height: 1.5; }
+
         .btn {
-            background: var(--primary);
-            border: none;
-            padding: 15px 30px;
+            background: var(--rose);
             color: white;
+            border: none;
+            padding: 12px 25px;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
-            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(255, 0, 85, 0.4);
             transition: 0.3s;
         }
+        .btn:hover { transform: scale(1.1); background: #e6004c; }
 
-        .btn:hover { transform: scale(1.05); background: #ff1a75; }
+        /* Animations */
+        .big-heart { font-size: 80px; animation: heartbeat 1s infinite; }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.2); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.1); }
+            60% { transform: scale(1); }
+        }
 
-        .heart { color: var(--primary); font-size: 50px; animation: beat 1s infinite; }
-        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        .float { font-size: 50px; animation: floating 3s infinite ease-in-out; }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
 
-        /* Final Ending */
-        #final-ending {
-            display: none;
-            background: radial-gradient(circle, #2e0014, #000);
-            width: 100vw;
-            height: 100vh;
+        .kiss-box { font-size: 40px; margin: 20px; }
+        .kiss-anim { animation: kiss 2s infinite; display: inline-block; }
+        @keyframes kiss {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.1);
             position: fixed;
-            top: 0;
-            z-index: 2000;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            top: 0; left: 0;
         }
+        #progress { height: 100%; width: 10%; background: var(--rose); transition: 0.5s; }
 
-        .floating-hearts span {
-            position: absolute;
-            color: var(--primary);
-            animation: float 5s linear infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
+        .rain { position: fixed; top: -10%; pointer-events: none; animation: fall 4s linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<div id="progress-container"><div id="progress-bar"></div></div>
+    <div class="progress-bar"><div id="progress"></div></div>
 
-<div id="intro">
-    <div class="heart">❤️</div>
-    <h1>Hi Sakshi...</h1>
-    <p>Altamas has woven a digital web for you.<br>It takes 2 minutes to solve. Are you ready?</p>
-    <button class="btn" onclick="nextStep(1)">Start the Journey</button>
-</div>
+    <div id="journey-box">
+        
+        <div id="step1" class="step active">
+            <div class="big-heart">❤️</div>
+            <h1>Hi My Sakshi!</h1>
+            <p>Altamas ne tumhare liye ek bahut bada aur pyara safar banaya hai... Kya tum tayyar ho?</p>
+            <button class="btn" onclick="go(2)">Haan, Shuru Karo! ❤️</button>
+        </div>
 
-<div id="step1" class="step">
-    <h2>Step 1: The Foundation</h2>
-    <p>Every story has a beginning. Ours is my favorite.<br>Do you remember how we felt on day one?</p>
-    <button class="btn" onclick="nextStep(2)">I remember ❤️</button>
-</div>
+        <div id="step2" class="step">
+            <div class="float">🌸</div>
+            <h1>Pehli Baat...</h1>
+            <p>Jab se tum meri life mein aayi ho, sab kuch badal gaya hai. Tumhari smile meri sabse badi taqat hai.</p>
+            <button class="btn" onclick="go(3)">Aage Chalo...</button>
+        </div>
 
-<div id="step2" class="step">
-    <h2>Step 2: The Strength</h2>
-    <p>A web is strong because of its many threads.<br>Each thread is a time you made me laugh or supported me.</p>
-    <p><i>Click the heart to strengthen the bond.</i></p>
-    <div class="heart" style="cursor:pointer" onclick="nextStep(3)">❤️</div>
-</div>
+        <div id="step3" class="step">
+            <div class="kiss-box">👨‍💻 ❤️ 👩‍💼</div>
+            <h1>Humari Jodi</h1>
+            <p>Main Altamas aur tum Sakshi... Hum duniya ki sabse best team hain, haina?</p>
+            <button class="btn" onclick="go(4)">Bilkulll!</button>
+        </div>
 
-<div id="step3" class="step">
-    <h2>Step 3: The Secret</h2>
-    <p>I asked the stars about us, and they gave me a formula:</p>
-    <h3 style="color: var(--gold);">Happiness = (Sakshi) + (Altamas) × Infinity</h3>
-    <button class="btn" onclick="nextStep(4)">That's deep...</button>
-</div>
+        <div id="step4" class="step">
+            <div class="float">🧸</div>
+            <h1>Mera Cutie Pie</h1>
+            <p>Tum itni pyari ho ki kabhi kabhi mera mann karta hai tumhe bas dekhta rahoon. (No touchy, only looky! 😂)</p>
+            <button class="btn" onclick="go(5)">Hehe, Next!</button>
+        </div>
 
-<div id="step4" class="step">
-    <h2>Step 4: The Promise</h2>
-    <p>Before the end, promise me this:<br>No matter how big the web gets, we stay at the center together.</p>
-    <button class="btn" onclick="showFinal()">I Promise, Altamas</button>
-</div>
+        <div id="step5" class="step">
+            <div class="kiss-box">
+                <span>👨</span><span class="kiss-anim">💋</span><span>👩</span>
+            </div>
+            <h1>Virtual Hug & Kiss</h1>
+            <p>Ye wali kiss specially Sakshi ke liye jab hum door hote hain.</p>
+            <button class="btn" onclick="go(6)">Mili? Aage Badho!</button>
+        </div>
 
-<div id="final-ending">
-    <h1 style="font-size: 3.5rem; color: var(--gold); text-shadow: 0 0 20px var(--gold);">I LOVE YOU SAKSHI</h1>
-    <p style="font-size: 1.5rem;">You are my everything.</p>
-    <div class="heart">❤️</div>
-    <p style="margin-top: 30px;">- Your Altamas</p>
-    <div class="floating-hearts" id="hearts-container"></div>
-</div>
+        <div id="step6" class="step">
+            <div class="float">🌟</div>
+            <h1>Tumhaari Khubsurti</h1>
+            <p>Sirf chehre se nahi, tum dil se bhi sabse sundar ho. Altamas bahut lucky hai!</p>
+            <button class="btn" onclick="go(7)">Accha ji? Next...</button>
+        </div>
 
-<audio id="loveAudio" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+        <div id="step7" class="step">
+            <div class="big-heart" style="font-size: 50px;">♾️</div>
+            <h1>Ek Chhota Wada</h1>
+            <p>Main wada karta hoon ki main hamesha tumhara dhyan rakhunga aur tumhe dher saara pyar karunga.</p>
+            <button class="btn" onclick="go(8)">I Trust You ❤️</button>
+        </div>
 
-<script>
-    let currentStep = 0;
-    const totalSteps = 4;
-    const audio = document.getElementById("loveAudio");
+        <div id="step8" class="step">
+            <div class="float">💍</div>
+            <h1>Future Dreams</h1>
+            <p>Hamare sapne, hamari baatein, aur hamara aane wala kal... Sab kitna haseen hoga na?</p>
+            <button class="btn" onclick="go(9)">Haaan Bahut!</button>
+        </div>
 
-    function nextStep(step) {
-        // Play audio on first interaction
-        if(step === 1) audio.play();
+        <div id="step9" class="step">
+            <div class="float">🥂</div>
+            <h1>Bas Thoda Aur...</h1>
+            <p>Ab hum safar ke end tak pahunch rahe hain. Dil tham kar baitho, Sakshi!</p>
+            <button class="btn" onclick="go(10)">Final Surprise!</button>
+        </div>
 
-        // Hide current
-        if(currentStep === 0) document.getElementById('intro').style.display = 'none';
-        else document.getElementById('step' + currentStep).style.display = 'none';
+        <div id="step10" class="step">
+            <div class="big-heart" style="color: var(--gold);">💖</div>
+            <h1 style="color: var(--gold); font-size: 2.5rem;">I LOVE YOU SAKSHI!</h1>
+            <p style="font-size: 1.4rem;">Tum hi mera aaj ho aur tum hi mera kal ho.</p>
+            <div class="kiss-box">👩‍❤️‍💋‍👨</div>
+            <p>- Tumhara Altamas</p>
+            <button class="btn" onclick="location.reload()">Reset Love ❤️</button>
+        </div>
 
-        // Show next
-        document.getElementById('step' + step).style.display = 'flex';
-        currentStep = step;
+    </div>
 
-        // Update progress
-        document.getElementById('progress-bar').style.width = (step / totalSteps * 100) + '%';
-    }
-
-    function showFinal() {
-        document.getElementById('step4').style.display = 'none';
-        document.getElementById('final-ending').style.display = 'flex';
-        document.getElementById('progress-bar').style.width = '100%';
-        createHearts();
-    }
-
-    function createHearts() {
-        const container = document.getElementById('hearts-container');
-        for (let i = 0; i < 50; i++) {
-            const heart = document.createElement('span');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-            container.appendChild(heart);
+    <script>
+        function go(n) {
+            // Hide all
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            // Show current
+            document.getElementById('step' + n).classList.add('active');
+            // Update progress
+            document.getElementById('progress').style.width = (n * 10) + '%';
+            
+            // Special effect for final step
+            if(n === 10) {
+                launchHearts();
+            }
         }
-    }
-</script>
 
+        function launchHearts() {
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const h = document.createElement('div');
+                    h.innerHTML = ['❤️','💖','💕','💋','✨'][Math.floor(Math.random()*5)];
+                    h.className = 'rain';
+                    h.style.left = Math.random() * 100 + 'vw';
+                    h.style.fontSize = Math.random() * 30 + 10 + 'px';
+                    h.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(h);
+                    setTimeout(() => h.remove(), 5000);
+                }, i * 50);
+            }
+        }
+    </script>
 </body>
 </html>
-
