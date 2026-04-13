@@ -1,113 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Sakshi ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message for Sakshi</title>
+    <style>
+        :root {
+            --primary: #ff4d94;
+            --gold: #ffd700;
+            --bg: #0a0a0a;
+        }
 
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to bottom, #000000, #1a001a);
-  color: white;
-  font-family: Arial;
-  text-align: center;
-  overflow: hidden;
-}
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
 
-h1 {
-  margin-top: 40%;
-  font-size: 28px;
-}
+        /* Progress Bar */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 8px;
+            background: #222;
+            z-index: 1000;
+        }
 
-#text {
-  font-size: 18px;
-  padding: 10px;
-}
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, var(--primary), var(--gold));
+            transition: 0.4s;
+        }
 
-button {
-  padding: 12px 25px;
-  font-size: 16px;
-  border: none;
-  background: #ff4d88;
-  color: white;
-  border-radius: 25px;
-  margin-top: 20px;
-  cursor: pointer;
-}
+        /* Intro Screen */
+        #intro {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-.heart {
-  position: fixed;
-  color: red;
-  animation: float 6s linear infinite;
-}
+        /* Step Styling */
+        .step {
+            display: none;
+            min-height: 80vh;
+            width: 90%;
+            max-width: 600px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: slideIn 0.8s ease-out;
+        }
 
-@keyframes float {
-  0% {transform: translateY(100vh);}
-  100% {transform: translateY(-10vh);}
-}
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-#final {
-  display: none;
-  font-size: 24px;
-  margin-top: 40%;
-  padding: 10px;
-}
-</style>
+        .btn {
+            background: var(--primary);
+            border: none;
+            padding: 15px 30px;
+            color: white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+            margin-top: 20px;
+            transition: 0.3s;
+        }
 
+        .btn:hover { transform: scale(1.05); background: #ff1a75; }
+
+        .heart { color: var(--primary); font-size: 50px; animation: beat 1s infinite; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        /* Final Ending */
+        #final-ending {
+            display: none;
+            background: radial-gradient(circle, #2e0014, #000);
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            z-index: 2000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-hearts span {
+            position: absolute;
+            color: var(--primary);
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Hey Sakshi ❤️</h1>
-<div id="text"></div>
+<div id="progress-container"><div id="progress-bar"></div></div>
 
-<button onclick="startLove()">Tap Here 💖</button>
+<div id="intro">
+    <div class="heart">❤️</div>
+    <h1>Hi Sakshi...</h1>
+    <p>Altamas has woven a digital web for you.<br>It takes 2 minutes to solve. Are you ready?</p>
+    <button class="btn" onclick="nextStep(1)">Start the Journey</button>
+</div>
 
-<div id="final">You Made My Life Beautiful 💫❤️<br>Thank You For Everything 🥺</div>
+<div id="step1" class="step">
+    <h2>Step 1: The Foundation</h2>
+    <p>Every story has a beginning. Ours is my favorite.<br>Do you remember how we felt on day one?</p>
+    <button class="btn" onclick="nextStep(2)">I remember ❤️</button>
+</div>
 
-<!-- Romantic Music -->
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=romantic-ambient-110397.mp3">
+<div id="step2" class="step">
+    <h2>Step 2: The Strength</h2>
+    <p>A web is strong because of its many threads.<br>Each thread is a time you made me laugh or supported me.</p>
+    <p><i>Click the heart to strengthen the bond.</i></p>
+    <div class="heart" style="cursor:pointer" onclick="nextStep(3)">❤️</div>
+</div>
+
+<div id="step3" class="step">
+    <h2>Step 3: The Secret</h2>
+    <p>I asked the stars about us, and they gave me a formula:</p>
+    <h3 style="color: var(--gold);">Happiness = (Sakshi) + (Altamas) × Infinity</h3>
+    <button class="btn" onclick="nextStep(4)">That's deep...</button>
+</div>
+
+<div id="step4" class="step">
+    <h2>Step 4: The Promise</h2>
+    <p>Before the end, promise me this:<br>No matter how big the web gets, we stay at the center together.</p>
+    <button class="btn" onclick="showFinal()">I Promise, Altamas</button>
+</div>
+
+<div id="final-ending">
+    <h1 style="font-size: 3.5rem; color: var(--gold); text-shadow: 0 0 20px var(--gold);">I LOVE YOU SAKSHI</h1>
+    <p style="font-size: 1.5rem;">You are my everything.</p>
+    <div class="heart">❤️</div>
+    <p style="margin-top: 30px;">- Your Altamas</p>
+    <div class="floating-hearts" id="hearts-container"></div>
+</div>
+
+<audio id="loveAudio" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-let msg = "I may not be perfect, but when I see you... everything feels perfect ❤️";
-let i = 0;
+    let currentStep = 0;
+    const totalSteps = 4;
+    const audio = document.getElementById("loveAudio");
 
-function typeWriter() {
-  if (i < msg.length) {
-    document.getElementById("text").innerHTML += msg.charAt(i);
-    i++;
-    setTimeout(typeWriter, 40);
-  }
-}
+    function nextStep(step) {
+        // Play audio on first interaction
+        if(step === 1) audio.play();
 
-function createHeart() {
-  let heart = document.createElement("div");
-  heart.innerHTML = "❤️";
-  heart.className = "heart";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-  document.body.appendChild(heart);
+        // Hide current
+        if(currentStep === 0) document.getElementById('intro').style.display = 'none';
+        else document.getElementById('step' + currentStep).style.display = 'none';
 
-  setTimeout(() => {
-    heart.remove();
-  }, 6000);
-}
+        // Show next
+        document.getElementById('step' + step).style.display = 'flex';
+        currentStep = step;
 
-setInterval(createHeart, 400);
+        // Update progress
+        document.getElementById('progress-bar').style.width = (step / totalSteps * 100) + '%';
+    }
 
-function startLove() {
-  document.getElementById("bgMusic").play();
-  typeWriter();
+    function showFinal() {
+        document.getElementById('step4').style.display = 'none';
+        document.getElementById('final-ending').style.display = 'flex';
+        document.getElementById('progress-bar').style.width = '100%';
+        createHearts();
+    }
 
-  setTimeout(() => {
-    document.getElementById("final").style.display = "block";
-  }, 7000);
-}
+    function createHearts() {
+        const container = document.getElementById('hearts-container');
+        for (let i = 0; i < 50; i++) {
+            const heart = document.createElement('span');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            container.appendChild(heart);
+        }
+    }
 </script>
 
 </body>
-      </html>
+</html>
+
